@@ -1,43 +1,30 @@
 import React from "react";
 
-function GuessInput({ guess, handleChange, track, handleTrack }) {
-  //const [guessInput, setGuessInput] = React.useState("");
-  //console.log(guessInput);
-
-  // const [track, setTrack] = React.useState([]);
-  // // console.log("track", track);
-
-  // function handleTrack(next) {
-  //   const nextTrack = [...track, next];
-
-  //   setTrack(nextTrack);
-  //   console.log("track", track);
-  // }
+function GuessInput({ handleTrack }) {
+  const [guessInput, setGuessInput] = React.useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    const guessAnswer = { guess, id: Date.now() };
-    console.log(guessAnswer);
-    handleChange("");
-    handleTrack(guessAnswer);
+
+    console.log({ guessInput });
+    handleTrack(guessInput);
+    setGuessInput("");
   }
-  console.log("track2", track);
+
   return (
     <div>
       <form className="guess-input-wrapper" onSubmit={handleSubmit}>
         <label htmlFor="guess-input">Enter guess: (five letter word)</label>
         <input
+          required
           // minLength="5"
           // maxLength="5"
           pattern="\w{5,5}"
           id="guess-input"
           type="text"
-          value={guess}
-          // onChange={(event) => {
-          //   setGuessInput(event.target.value.toUpperCase());
-          // }}
+          value={guessInput}
           onChange={(event) => {
-            handleChange(event.target.value.toUpperCase());
+            setGuessInput(event.target.value.toUpperCase());
           }}
         />
       </form>

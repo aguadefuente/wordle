@@ -11,7 +11,8 @@ function TrackGuesses({ track }) {
       {/* EJERCICIO 3 */}
       {/* usando range utility */}
       <div className="guess-results">
-        {/* renderizará 6 veces el componente GuessSlot */}
+        {/* renderizará 6 veces el componente GuessSlot. Serían
+        6 rows */}
         {range(NUM_OF_GUESSES_ALLOWED).map((num) => {
           return <GuessSlot key={num} value={track[num]} />;
         })}

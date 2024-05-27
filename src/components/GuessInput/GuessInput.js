@@ -1,14 +1,15 @@
 import React from "react";
 import { checkGuess } from "../../game-helpers";
 
-function GuessInput({ handleTrack }) {
+function GuessInput({ handleTrack, answer }) {
   const [guessInput, setGuessInput] = React.useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log({ guessInput });
+    console.log(guessInput);
     handleTrack(guessInput);
+   
     setGuessInput("");
   }
 

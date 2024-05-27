@@ -2,10 +2,19 @@ import React from "react";
 import GuessSlot from "../GuessSlot/GuessSlot";
 import { range } from "../../utils";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { checkGuess } from "../../game-helpers";
 
 //ej) range(5) [0,1,2,3,4]
 
-function TrackGuesses({ track }) {
+function TrackGuesses({ track, answer }) {
+
+  track.forEach((elem) => {
+      checkGuess(elem, answer)
+      console.log("consoleg prueba", checkGuess(elem, answer))
+  })
+
+  
+  
   return (
     <>
       {/* EJERCICIO 3 */}
@@ -14,7 +23,7 @@ function TrackGuesses({ track }) {
         {/* renderizará 6 veces el componente GuessSlot. Serían
         6 rows */}
         {range(NUM_OF_GUESSES_ALLOWED).map((num) => {
-          return <GuessSlot key={num} value={track[num]} />;
+          return <GuessSlot key={num} value={track[num]} answer={answer}/>;
         })}
 
         {/* <div className="guess-results">

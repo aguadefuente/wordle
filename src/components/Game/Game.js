@@ -18,8 +18,18 @@ function Game() {
   const [track, setTrack] = React.useState([]);
   console.log("track-afuera", track);
 
-  const [status, setStatus] = React.useState({status: "", try: 0})
-  
+  function handleTrack(guess) {
+    setTrack([...track, guess]);
+  }
+
+  //si quisiéramos que fuera un array de objetos
+  // function handleTrack(guess) {
+  //   const nextTrack = { value: guess, id: `${guess}-${Math.random()}` };
+  //   setTrack([...track, nextTrack]);
+  // }
+
+
+  //FIN DEL JUEGO
   let guessValue
 
   track.map((elem) => {
@@ -36,25 +46,13 @@ function Game() {
   })
   console.log({sonTodosCorrectos})
 
-  
-  track.forEach((elem) => {
-      checkGuess(elem, answer)
-      console.log("consoleg finalizando", checkGuess(elem, answer))
-  })
-
-  function handleTrack(guess) {
-    setTrack([...track, guess]);
-  }
-
-  //si quisiéramos que fuera un array de objetos
-  // function handleTrack(guess) {
-  //   const nextTrack = { value: guess, id: `${guess}-${Math.random()}` };
-  //   setTrack([...track, nextTrack]);
-  // }
 
   return (
     <>
-      {/* <GameEnd status={"happy"}/> */}
+     {
+      sonTodosCorrectos && <GameEnd status={sonTodosCorrectos === true ? "happy" : "sad"}/> 
+     }
+      
       <TrackGuesses track={track} answer={answer}/>
       <GuessInput handleTrack={handleTrack} answer={answer}/>
     </>

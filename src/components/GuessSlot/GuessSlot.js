@@ -4,6 +4,7 @@ import { checkGuess } from "../../game-helpers";
 
 function GuessSlot({ value, answer }) {
   const guess = checkGuess(value, answer)
+  
   return (
     <>
       {/* con range utility 
@@ -11,7 +12,9 @@ function GuessSlot({ value, answer }) {
       por contenido la misma, sino se verá vacío*/}
       <p className="guess">
         {range(5).map((num) => {
-          const statusClass = guess?.[num] ? guess[num].status : ''
+          const statusClass = guess?.[num] ? guess[num].status : '' 
+          //?. significa - si guess[num] no es null le asigne el valor guess[num].status, caso contrario empty string
+          //otro modo de escribir lo mismo
           //const statusClass = guess && guess[num] ? guess[num].status : ''
           return (
             <span className={`cell ${statusClass}`}  key={num}>

@@ -8,13 +8,11 @@ import { checkGuess } from "../../game-helpers";
 
 function TrackGuesses({ track, answer }) {
 
-  track.forEach((elem) => {
-      checkGuess(elem, answer)
-      console.log("consoleg prueba", checkGuess(elem, answer))
-  })
+  // track.forEach((elem) => {
+  //     checkGuess(elem, answer)
+  //     console.log("consoleg prueba", checkGuess(elem, answer))
+  // })
 
-  
-  
   return (
     <>
       {/* EJERCICIO 3 */}
@@ -36,7 +34,7 @@ function TrackGuesses({ track, answer }) {
         {track.map((word, index) => {
           return <GuessSlot key={index} value={word} />;
         })} */}
-        {/* hemos usamos el index del map como key de nuestro paragraph
+        {/* Nota: hemos usamos el index del map como key de nuestro paragraph
         ya que dada las reglas del juego no van a cambiar
         las palabras de orden en nuestro array, ni
         se pueden eliminar */}
@@ -51,18 +49,7 @@ function TrackGuesses({ track, answer }) {
         })} */}
       </div>
 
-      {/* jugando: agregando span para cada letra */}
-      {/* <div className="guess-results">
-        {track.map(({ id, guess }) => {
-          return (
-            <p key={id} className="guess">
-              {guess.split("").map((element) => {
-                return <span className="cell">{element}</span>;
-              })}
-            </p>
-          );
-        })}
-      </div> */}
+    
     </>
   );
 }

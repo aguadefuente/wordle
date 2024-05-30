@@ -1,7 +1,6 @@
 import React from "react";
-import { checkGuess } from "../../game-helpers";
 
-function GuessInput({ handleTrack, answer }) {
+function GuessInput({ handleTrack, disable }) {
   const [guessInput, setGuessInput] = React.useState("");
 
   function handleSubmit(event) {
@@ -9,7 +8,7 @@ function GuessInput({ handleTrack, answer }) {
 
     console.log(guessInput);
     handleTrack(guessInput);
-   
+
     setGuessInput("");
   }
 
@@ -18,6 +17,7 @@ function GuessInput({ handleTrack, answer }) {
       <form className="guess-input-wrapper" onSubmit={handleSubmit}>
         <label htmlFor="guess-input">Enter guess: (five letter word)</label>
         <input
+          disabled={disable}
           required
           // minLength="5"
           // maxLength="5"

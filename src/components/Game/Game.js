@@ -7,12 +7,10 @@ import TrackGuesses from "../TrackGuesses/TrackGuesses";
 import { checkGuess } from "../../game-helpers";
 import GameEnd from "../GameEnd/GameEnd";
 
-
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
 console.info(answer);
-
 
 function Game() {
   const [track, setTrack] = React.useState([]);
@@ -28,33 +26,49 @@ function Game() {
   //   setTrack([...track, nextTrack]);
   // }
 
-
   //FIN DEL JUEGO
-  let guessValue
+  let guessValue;
 
   track.map((elem) => {
-    return guessValue = elem
-  })
+    return (guessValue = elem);
+  });
 
-  console.log('guessValue', guessValue)
+  console.log("guessValue", guessValue);
 
-  let resultGuesses = guessValue && checkGuess(guessValue, answer) 
-  console.log("resultGuesses", resultGuesses)
+  let resultGuesses = guessValue && checkGuess(guessValue, answer);
+  console.log("resultGuesses", resultGuesses);
 
-  let sonTodosCorrectos = resultGuesses && resultGuesses.every((elem) => {
-   return elem.status === "correct"
-  })
-  console.log({sonTodosCorrectos})
+  let sonTodosCorrectos =
+    resultGuesses &&
+    resultGuesses.every((elem) => {
+      return elem.status === "correct";
+    });
+  console.log({ sonTodosCorrectos });
 
+  let maxGuesses = track.length;
+  console.log({ maxGuesses });
+
+  let disableInput = Boolean(sonTodosCorrectos || maxGuesses >= 6);
+  console.log({ disableInput });
+  console.log(maxGuesses > 6);
+
+  //
 
   return (
     <>
-     {
-      sonTodosCorrectos && <GameEnd status={sonTodosCorrectos === true ? "happy" : "sad"}/> 
-     }
-      
-      <TrackGuesses track={track} answer={answer}/>
-      <GuessInput handleTrack={handleTrack} answer={answer}/>
+      {sonTodosCorrectos ? (
+        <GameEnd status="happy" />
+      ) : maxGuesses === 6 ? (
+        <GameEnd status="sad" />
+      ) : null}
+
+      <TrackGuesses track={track} answer={answer} />
+
+      <GuessInput
+        handleTrack={handleTrack}
+        answer={answer}
+        disable={disableInput}
+      />
     </>
   );
 }

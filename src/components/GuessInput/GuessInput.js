@@ -15,13 +15,14 @@ function GuessInput({ handleTrack, disable }) {
   return (
     <div>
       <form className="guess-input-wrapper" onSubmit={handleSubmit}>
-        <label htmlFor="guess-input">Enter guess: (five letter word)</label>
+        <label htmlFor="guess-input">Enter guess:</label>
         <input
           disabled={disable}
           required
           // minLength="5"
           // maxLength="5"
           pattern="\w{5,5}"
+          title="five letter word" //para que el browser nos diga la regla a seguir
           id="guess-input"
           type="text"
           value={guessInput}

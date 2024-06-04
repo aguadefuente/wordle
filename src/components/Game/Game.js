@@ -40,6 +40,8 @@ function Game() {
 
   //FIN DEL JUEGO
   ////////////////////// Mi modo
+  // sacar todo este trozo para usar alguna de las soluciones de Joy y modificar el disable del GuessInput component
+  //DESDE AQUÍ
   let guessValue;
 
   track.map((elem) => {
@@ -65,8 +67,6 @@ function Game() {
   console.log({ disableInput });
   console.log(maxGuesses > 6);
 
-  //
-
   return (
     <>
       {sonTodosCorrectos ? (
@@ -84,8 +84,10 @@ function Game() {
       />
     </>
   );
+  // HASTA AQUI
 
   ////////////////////  Joy solution
+  //DESCOMENTAR DESDE AQUI
   //running | won | lost
   // const [gameStatus, setGameStatus] = React.useState("running");
 
@@ -99,6 +101,9 @@ function Game() {
   //       answer={answer}
   //       gameStatus={gameStatus}
   //     />
+  //HASTA AQUI
+
+  //ELEGIR ALGUNA DE LAS OPCIONES PRIMER SOLUCION O SEGUNDA SOLUCION
 
   //     {/* PRIMER JOY SOLUTION */}
   //     {/* {gameStatus !== "running" && (

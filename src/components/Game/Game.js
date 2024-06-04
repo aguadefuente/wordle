@@ -11,10 +11,11 @@ import GameOverBanner from "../GameOverBanner/GameOverBanner";
 import WonBanner from "../WonBanner/WonBanner";
 import LostBanner from "../LostBanner/LostBanner";
 
+//SIN RESTART BUTTON
 // Pick a random word on every pageload.
-const answer = sample(WORDS);
+//const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
-console.info(answer);
+//console.info({ answer });
 
 function Game() {
   const [track, setTrack] = React.useState([]);
@@ -31,6 +32,28 @@ function Game() {
     //   setGameStatus("lost");
     // }
   }
+
+  //RESTART BUTTON GAME - metemos el answer en un estado
+  const [answer, setAnswer] = React.useState(sample(WORDS));
+  console.log({ answer });
+
+  function handleStart() {
+    setTrack([]);
+    setAnswer(sample(WORDS));
+  }
+
+  const buttonStyle = {
+    backgroundColor: "#008CBA",
+    border: "none",
+    color: "white",
+    padding: "15px 32px",
+    textAlign: "center",
+    textDecoration: "none",
+    display: "inline-block",
+    fontSize: "16px",
+    margin: "4px 2px",
+    cursor: "pointer",
+  };
 
   //si quisiéramos que fuera un array de objetos
   // function handleTrack(guess) {
@@ -69,6 +92,9 @@ function Game() {
 
   return (
     <>
+      <button onClick={handleStart} style={buttonStyle}>
+        RESTART
+      </button>
       {sonTodosCorrectos ? (
         <GameEnd status="happy" numOfGuesses={track.length} />
       ) : maxGuesses === 6 ? (

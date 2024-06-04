@@ -6,6 +6,10 @@ import GuessInput from "../GuessInput/GuessInput";
 import TrackGuesses from "../TrackGuesses/TrackGuesses";
 import { checkGuess } from "../../game-helpers";
 import GameEnd from "../GameEnd/GameEnd";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import GameOverBanner from "../GameOverBanner/GameOverBanner";
+import WonBanner from "../WonBanner/WonBanner";
+import LostBanner from "../LostBanner/LostBanner";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -14,10 +18,18 @@ console.info(answer);
 
 function Game() {
   const [track, setTrack] = React.useState([]);
-  console.log("track-afuera", track);
+  console.log("track-afuera", track.length);
 
   function handleTrack(guess) {
-    setTrack([...track, guess]);
+    const nextGuesses = [...track, guess];
+    setTrack(nextGuesses);
+
+    // //fin del juego - Joy solution
+    // if (guess === answer) {
+    //   setGameStatus("won");
+    // } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+    //   setGameStatus("lost");
+    // }
   }
 
   //si quisiéramos que fuera un array de objetos
@@ -27,6 +39,7 @@ function Game() {
   // }
 
   //FIN DEL JUEGO
+  ////////////////////// Mi modo
   let guessValue;
 
   track.map((elem) => {
@@ -57,9 +70,9 @@ function Game() {
   return (
     <>
       {sonTodosCorrectos ? (
-        <GameEnd status="happy" />
+        <GameEnd status="happy" numOfGuesses={track.length} />
       ) : maxGuesses === 6 ? (
-        <GameEnd status="sad" />
+        <GameEnd status="sad" answer={answer} />
       ) : null}
 
       <TrackGuesses track={track} answer={answer} />
@@ -71,6 +84,36 @@ function Game() {
       />
     </>
   );
+
+  ////////////////////  Joy solution
+  //running | won | lost
+  // const [gameStatus, setGameStatus] = React.useState("running");
+
+  // return (
+  //   <>
+  //     {gameStatus}
+  //     <TrackGuesses track={track} answer={answer} />
+
+  //     <GuessInput
+  //       handleTrack={handleTrack}
+  //       answer={answer}
+  //       gameStatus={gameStatus}
+  //     />
+
+  //     {/* PRIMER JOY SOLUTION */}
+  //     {/* {gameStatus !== "running" && (
+  //       <GameOverBanner
+  //         gameStatus={gameStatus}
+  //         numOfGuesses={track.length}
+  //         answer={answer}
+  //       />
+  //     )} */}
+
+  //     {/* SEGUNDA JOY SOLUTION - con un componente más reutilizable */}
+  //     {gameStatus === "won" && <WonBanner numOfGuesses={track.length} />}
+  //     {gameStatus === "lost" && <LostBanner answer={answer} />}
+  //   </>
+  // );
 }
 
 export default Game;
